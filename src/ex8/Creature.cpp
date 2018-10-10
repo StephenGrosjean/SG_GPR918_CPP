@@ -16,7 +16,7 @@ void Creature::Update () {
   RandomMove ();
   IncrementHunger ();
   if (hungerPercent >= 100){
-    Die ();
+    Destroy ();
     return;
   }
   Vector2D foodPosition = FindNearbyFoodPosition ();
@@ -73,15 +73,14 @@ void Creature::RandomMove () {
   simulation->map.MoveGameObjetTo(*this, newX, newY);
 }
 
-void Creature::Die () {
-
-  isDestroyed = true;
-}
-
 void Creature::IncrementHunger () {
   hungerPercent += hungerSpeedIncrement;
 }
 void Creature::Start ()
 {
 
+}
+char Creature::GetImage ()
+{
+  return 'C';
 }

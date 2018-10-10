@@ -14,7 +14,7 @@ class Food : public GameObject {
   void Start () override;
   void Update() override;
 
-  char GetImage ();
+  char GetImage () override;
 
 };
 

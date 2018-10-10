@@ -10,6 +10,8 @@
 #include <list>
 
 #include <ex8/Simulation.h>
+
+
 void simulate() {
 	Simulation simulation(445);
 	simulation.Init ();

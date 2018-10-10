@@ -63,18 +63,18 @@ void Map::Update () {
   for (auto * gameObject : m_GameObjectsForUpdate) {
       gameObject->Update ();
 
-    }
+  }
   //Destroy element
 
-
-  //Destroy updates elements
-  m_GameObjectsForUpdate.remove_if([](GameObject * gameObject) {return gameObject->IsObjectDestroyed (); });
-  //Destroy map elements
+//Destroy map elements
   for (auto * gameObject : m_GameObjectsForUpdate) {
       if (gameObject->IsObjectDestroyed ()) {
           RemoveObjectAt(gameObject->GetPosition ());
         }
     }
+  //Destroy updates elements
+  m_GameObjectsForUpdate.remove_if([](GameObject * gameObject) {return gameObject->IsObjectDestroyed (); });
+
 }
 
 

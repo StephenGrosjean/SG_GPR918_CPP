@@ -18,9 +18,7 @@ class Creature : public GameObject
 
   void Start () override;
   void Update () override;
-  char GetImage () {
-    return 'C';
-  }
+  char GetImage () override;
 
 
  private:
@@ -39,7 +37,7 @@ class Creature : public GameObject
 
 
   void RandomMove () ;
-  void Die ();
+
 
   void IncrementHunger ();
 
