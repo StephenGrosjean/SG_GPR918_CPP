@@ -32,7 +32,7 @@ bool Map::AddGameObjectAt (std::unique_ptr<GameObject> gameObject, int positionX
 
 
 bool Map::GameObjectExistAt (Vector2D position) {
-  return m_Map[position.x][position.y] != nullptr;
+  return m_Map[position.x][position.y] != nullptr && !m_Map[position.x][position.y]->IsObjectDestroyed ();
 }
 
 bool Map::RemoveObjectAt(Vector2D position) {
@@ -66,14 +66,15 @@ void Map::Update () {
     }
   //Destroy element
 
+
+  //Destroy updates elements
+  m_GameObjectsForUpdate.remove_if([](GameObject * gameObject) {return gameObject->IsObjectDestroyed (); });
   //Destroy map elements
   for (auto * gameObject : m_GameObjectsForUpdate) {
       if (gameObject->IsObjectDestroyed ()) {
           RemoveObjectAt(gameObject->GetPosition ());
         }
     }
-  //Destroy updates elements
-  m_GameObjectsForUpdate.remove_if([](GameObject * gameObject) {return gameObject->IsObjectDestroyed (); });
 }
 
 
@@ -100,6 +101,9 @@ void Map::DisplayMap() {
   std::cout << "-------------------------" << std::endl;
 #ifdef WIN32
   system("Pause");
+#else
+  std::cin.ignore();
+  std::cin.get ();
 #endif
 }
 
@@ -116,5 +120,9 @@ int Map::CountCreaturesInMap () {
 
     }
 
-  return 0;
+  return counter;
+}
+GameObject * Map::GetContentAtPosition (Vector2D position)
+{
+  return m_Map[position.x][position.y].get ();
 }

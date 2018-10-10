@@ -24,7 +24,7 @@ void Simulation::Init () {
 }
 
 void Simulation::Start () {
-  while (IsEndSimulation ()) {
+  while (!IsEndSimulation ()) {
       Update ();
       map.DisplayMap();
     }
@@ -49,5 +49,5 @@ void Simulation::Update () {
 }
 
 bool Simulation::IsEndSimulation () {
-  return map.CountCreaturesInMap () <= 0;
+  return map.CountCreaturesInMap () == 0;
 }

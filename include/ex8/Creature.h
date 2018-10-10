@@ -25,7 +25,7 @@ class Creature : public GameObject
 
  private:
 
-  int hungerPourcent;
+  int hungerPercent;
   int hungerSpeedIncrement;
 
   //Return position. If food is not find, we return the value (-1,-1)

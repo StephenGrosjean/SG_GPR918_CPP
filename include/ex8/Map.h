@@ -24,9 +24,7 @@ class Map {
 
   bool AddGameObjectAt (std::unique_ptr<GameObject> gameObject, int positionX, int positionY);
 
-  GameObject & GetContentAtPosition (Vector2D position) {
-    return *m_Map[position.x][position.y];
-  }
+  GameObject * GetContentAtPosition (Vector2D position);
 
   template<typename T> bool GameObjectOfTypeExistAt (Vector2D position) ;
 

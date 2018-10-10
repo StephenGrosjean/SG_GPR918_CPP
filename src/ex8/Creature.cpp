@@ -5,8 +5,8 @@
 #include <ex8/Creature.h>
 #include <ex8/Simulation.h>
 
-Creature::Creature(Simulation * simulation, int hungerSpeedIncrement) : GameObject(simulation) {
-    hungerPourcent = 0;
+Creature::Creature(Simulation * simulation, int hungerSpeedIncrement) : GameObject(simulation), hungerSpeedIncrement(hungerSpeedIncrement) {
+    hungerPercent = 0;
 }
 
 void Creature::Update () {
@@ -15,17 +15,17 @@ void Creature::Update () {
   }
   RandomMove ();
   IncrementHunger ();
-  if (hungerPourcent >= 100){
-      Die ();
+  if (hungerPercent >= 100){
+    Die ();
     return;
   }
   Vector2D foodPosition = FindNearbyFoodPosition ();
-  if (foodPosition.x-position.x == 0 && foodPosition.y-position.y == 0) {
+  if (abs(foodPosition.x - position.x) <= 1 && abs(foodPosition.y - position.y) <= 1) {
 
-      GameObject & gameObject = simulation->map.GetContentAtPosition (foodPosition);
-      if (!gameObject.IsObjectDestroyed ()) {
-          gameObject.Destroy ();
-          hungerPourcent = 0;
+      auto* gameObject = simulation->map.GetContentAtPosition (foodPosition);
+      if (gameObject != nullptr && !gameObject->IsObjectDestroyed ()) {
+          gameObject->Destroy ();
+          hungerPercent = 0;
         }
   }
 
@@ -79,7 +79,7 @@ void Creature::Die () {
 }
 
 void Creature::IncrementHunger () {
-  hungerPourcent += hungerSpeedIncrement;
+  hungerPercent += hungerSpeedIncrement;
 }
 void Creature::Start ()
 {
