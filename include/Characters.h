@@ -11,19 +11,19 @@
 
 #include <iostream>
 
-class Hero;
 
-class Character {
+class Character
+{
 public:
 	Character(int, int, int, int);
 	void takeDamage(int damage);
-	virtual bool isAlive();
+	bool isAlive();
 	virtual void death() = 0;
 
 	int getHealth();
 	int getDefense();
 	int getAttack();
-
+	int getStrength();
 protected:
 	int health;
 	int attack;
@@ -31,21 +31,26 @@ protected:
 	int strength;
 };
 
+class Hero;
 
-class Monster : public Character{
-	public:
-		Monster(int,int,int,int);
-		void fight(Hero*);
-		void death();
+class Monster : public Character
+{
+    
+public:
+	using Character::Character;
+    void fight(Hero&);
+    void death();
 };
 
-class Hero : public Character{
-	public:
-		Hero(int,int,int,int);
-		void fight(Monster*);
-		void death();
+class Hero : public Character
+{
+public:
+	Hero(int, int, int, int);
+    void fight(Monster&);
+    void death();
+	void levelUp();
+	void save();
 };
-
 
 
 

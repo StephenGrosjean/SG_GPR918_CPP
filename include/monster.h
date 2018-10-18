@@ -5,11 +5,15 @@
 #ifndef SAE918_MONSTER_H
 #define SAE918_MONSTER_H
 
+class Player;
 
 class Monster
 {
 public:
 	void init();
+private:
+	static int monsterCount;
+	Player& player;
 
 };
 
